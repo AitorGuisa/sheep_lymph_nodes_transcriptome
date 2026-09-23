@@ -152,6 +152,3 @@ sed '1d' lncRNA_hmmscan.persequence.txt | awk '$5<1e-5 && $8<1e-5 {gsub(/_[0-9]/
 awk -F "\t" '{print $1}' CPAT_results.txt > tmp.txt
 awk -F "\t" 'FNR==NR {myarray[$1]++; next} myarray[$1] {print $1"\tprotein_coding"; next} {print $1"\tncRNA"}' list.txt tmp.txt > hmmscan_results.txt
 rm list.txt tmp.txt
-
-#----------------- Input the 3 program outputs in Rstudio an get the intersection between them ----------------------#
-
