@@ -3,7 +3,7 @@ library("tximport")
 library("rhdf5")
 library("DescTools")
 library("DESeq2")
-library("")
+library("factoextra")
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # Import the information about the sequenced samples
 sinfo <- read.csv2("ref/sinfo.csv", header = TRUE, sep = ",")
