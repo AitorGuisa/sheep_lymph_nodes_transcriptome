@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Choose base directory
 base="/media/labo/Expansion/lymph_node_total"
 
 # Using the list of concordant lncRNAs (lncRNA_final_list.txt), classify and name them according to position to nearly 
