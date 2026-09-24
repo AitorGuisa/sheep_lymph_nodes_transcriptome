@@ -13,9 +13,9 @@ This repository contains the scripts used in the manuscript: "Integrated mRNA an
   
 * [05GH_Functional_annotation.R](/05GH_Functional_annotation.R): This script performs the functional annotation of the differentially expressed genes and performs a TreeMap analysis.
   
-* [06GH_coexpression.R](/06GH_coexpression.R):
+* [06GH_coexpression.R](/06GH_coexpression.R): This script detect co-expressed gene modules and their hubgenes. Also export node and edge tables to construct a co-expression network in Cytoscape.
   
-* [07GH_miRNA_quantification.sh](/07GH_miRNA_quantification.sh):
+* [07GH_miRNA_quantification.sh](/07GH_miRNA_quantification.sh):This script performs quality control, preprocessing, alignement and quantification of the miRNA-seq data.
   
 * [08GH_mirna_expression_analysis.R](/08GH_mirna_expression_analysis.R):
   
