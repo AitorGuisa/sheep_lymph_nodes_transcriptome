@@ -1,8 +1,7 @@
 setwd(getwd())
-library(dplyr)
-library(ggplot2)
-library(gprofiler2)
-library(Rfuntzioak)
+library("dplyr")
+library("ggplot2")
+library("gprofiler2")
 load("00_scripts/rdata/diff_expr.RData")
 
 de_miRNAs <- unique(c(rownames(sigAC), rownames(sigVA), rownames(sigVC)))
