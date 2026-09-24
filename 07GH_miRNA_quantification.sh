@@ -9,7 +9,7 @@ fastqc rawfq/*.fastq.gz
 multiqc rawfq/*.zip
 mv multiqc_data multiqc_report.html log/
 
-# TRIMMOMATIC: Here, we remove the short reads (less than 16 bp) and the bases or reads with low quality with.
+# TRIMMOMATIC: Here, we remove the short reads (less than 16 bp) and the bases or reads with low quality with
 cd rawfq
 for f1 in *fastq.gz 
 do
