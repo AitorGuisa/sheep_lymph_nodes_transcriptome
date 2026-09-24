@@ -9,7 +9,7 @@ fastqc rawfq/*.fastq.gz
 multiqc rawfq/*.zip
 mv multiqc_data multiqc_report.html log/
 
-# TRIMMOMATIC: Here, we remove the short reads (less than 36 bp) and the bases or reads with low quality with.
+# TRIMMOMATIC: Here, we remove the short reads (less than 16 bp) and the bases or reads with low quality with.
 cd rawfq
 for f1 in *fastq.gz 
 do
@@ -22,14 +22,13 @@ trimmomatic SE  -phred33 rawfq/$f1 trimfq/$f2 \
 echo "${f1%%.fastq.gz} done, see log file: $f3"
 done
 
-# FASTQC: We check that low quality bases/reads were removed correctly.
+# FASTQC: We check that low quality bases/reads were removed correctly
 echo "Performing QC of trimmed reads"
 fastqc trimfq/*.fastq.gz
 multiqc trimfq/*.zip
 mv multiqc_data multiqc_report.html log/
 
-# Download the sheep reference genome in fasta format and convert it to bowtie format
-gzip -d 00_ref/Ovis_aries.ARS-UI_Ramb_v3.0.dna.toplevel.fa.gz
+# Convert the reference sheep genome to bowtie format
 bowtie-build -f 00_ref/Ovis_aries.ARS-UI_Ramb_v3.0.dna.toplevel.fa oar_index
 mkdir 00_references/oar_index
 mv *.ebwt 00_references/oar_index/
