@@ -18,7 +18,7 @@ venn <- data.frame("intersections" = c("all", "only_cpat_cpc2",
                                        "only_cpat", "only_cpc2", "only_hmmer"),
                    "values" = NA)
 
-# Calculate the number of novel potenrial lncRNAs in each Venn diagram segment
+# Calculate the number of novel potential lncRNAs in each Venn diagram segment
 venn[1,2] <- length(intersect(intersect(ocpat, ohmmscan), ocpc2))
 venn[2,2] <- length(intersect(ocpat, ocpc2)) - venn[1,2]
 venn[3,2] <- length(intersect(ocpat, ohmmscan)) - venn[1,2]
