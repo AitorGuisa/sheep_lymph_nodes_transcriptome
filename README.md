@@ -1,14 +1,31 @@
 # sheep_lymph_nodes_transcriptome
 
-
-
-
-
-
-# sheep-miRNAome
-This repository contains the scripts used in the manuscript: "The sheep miRNAome: Characterization and distribution of miRNAs in 21 tissues" https://doi.org/10.1016/j.gene.2022.146998
+This repository contains the scripts used in the manuscript: 
 
 ## Scripts
+* [01GH_Preprocessing_and_lncRNA_prediction.sh](/01GH_Preprocessing_and_lncRNA_prediction.sh):
+  
+* [02GH_lncRNA_intersection.R](/02GH_lncRNA_intersection.R):
+  
+* [03GH_quantification.sh](/03GH_quantification.sh):
+  
+* [04GH_Expression_analyses.R](/04GH_Expression_analyses.R):
+  
+* [05GH_Functional_annotation.R](/05GH_Functional_annotation.R):
+  
+* [06GH_coexpression.R](/06GH_coexpression.R):
+  
+* [07GH_miRNA_quantification.sh](/07GH_miRNA_quantification.sh):
+  
+* [08GH_mirna_expression_analysis.R](/08GH_mirna_expression_analysis.R):
+  
+* [09GH_target_prediction.R](/09GH_target_prediction.R):
+  
+* [10GH_mirna_target_corr.R](/10GH_mirna_target_corr.R):
+  
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ EXAMPLES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 * [mirdeep2-core-command.sh](/mirdeep2-core-command.sh): Code used to run the preprocessing of the samples, genome mapping and the core miRDeep2 algorithm.
 
 * [mirdeep2-quantifier.sh](/mirdeep2-quantifier.sh): Code used to run the miRDeep2 quantifier algorithm.
