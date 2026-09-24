@@ -33,7 +33,7 @@ bowtie-build -f 00_ref/Ovis_aries.ARS-UI_Ramb_v3.0.dna.toplevel.fa oar_index
 mkdir 00_references/oar_index
 mv *.ebwt 00_references/oar_index/
 
-# Map reads against sheep genome index
+# MIRDEEP2: Map reads against sheep genome index
 for f1 in *trimfq
 do
 	f2=${f1%%trim_fastq}"collapsed.fa"
@@ -53,7 +53,7 @@ done < sample_info.csv
 cat *collapsed.fa > merged.fa
 cd $base
 
-# Quantify miRNAs
+# MIRDEEP2: Quantify miRNAs
 quantifier.pl -p 00_references/premirna_seq.fa \
 	-m 00_references/mature_seq.fa \
 	-r mapping/merged.fa \
