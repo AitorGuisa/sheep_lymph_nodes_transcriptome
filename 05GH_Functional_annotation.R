@@ -6,7 +6,7 @@ library("rrvgo")
 # Import the list of DEGs
 load("00_scripts/rdata/expression.RData")
 
-# Create a function to obtain human orthologs
+# Create a function to obtain human orthologs from sheep genes
 Sheep2Human <- function(df) {
   df <- as.data.frame(df)
   loc_id <- df[startsWith(rownames(df), "LOC"), ]
