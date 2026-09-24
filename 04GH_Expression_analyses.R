@@ -4,7 +4,7 @@ library("rhdf5")
 library("DescTools")
 library("DESeq2")
 library("factoextra")
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
 # Import the information about the sequenced samples
 sinfo <- read.csv2("ref/sinfo.csv", header = TRUE, sep = ",")
 profile <- data.frame(row.names = c(1:100))
