@@ -4,7 +4,7 @@ library("gprofiler2")
 library("GWENA")
 library("dplyr")
 load("00_scripts/rdata/expression.RData")
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
 # CO-EXPRESSION ANALYSIS
 # Import the information about the sequenced samples.
 sinfo["treatments"] <- c(rep("yestreated", 10) , rep( "notreated", 7))
