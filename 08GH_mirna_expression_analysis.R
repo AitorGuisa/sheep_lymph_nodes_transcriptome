@@ -79,7 +79,7 @@ sigVA <- as.data.frame(dfresVA[which(dfresVA$padj < pval &
 
 # save data
 save(dfresAC, dfresVA, dfresVC, sigAC, sigVA, sigVC, 
-     file = "00_scripts/rdata/diff_expr1.RData")
+     file = "00_scripts/rdata/diff_expr.RData")
 
 # Import all the miRNA sequences and write the significantly differentially 
 # expressed mirna sequences in fasta files
