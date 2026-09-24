@@ -71,7 +71,7 @@ files <- file.path("kal_lnc", sinfo$sample, "abundance.h5")
 names(files) <- paste0(sinfo$sample)
 txi <- tximport(files, type = "kallisto", tx2gene = tx)
 
-# Remove ribosomic genes from counts and "Tin per gene" data frames
+# Remove ribosomic genes from counts
 counts <- as.data.frame(txi$counts)
 counts <- counts[-which(row.names(counts) %in% ribo$V1), ]
 
