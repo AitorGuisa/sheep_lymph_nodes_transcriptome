@@ -50,7 +50,7 @@ print(p)
 
 # Remove potential outlier samples
 sinfo <- sinfo[-6, ]
-counts <- counts[,-6]
+counts <- expressionMatrix[,-6]
 
 # Set adjusted p value and log2 fold change
 pval <- 0.05
