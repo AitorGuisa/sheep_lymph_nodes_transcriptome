@@ -75,17 +75,6 @@ txi <- tximport(files, type = "kallisto", tx2gene = tx)
 counts <- as.data.frame(txi$counts)
 counts <- counts[-which(row.names(counts) %in% ribo$V1), ]
 
-# Geo submission
-counts_out <- as.data.frame(txi_out$counts)
-sinfo_out["sname"] <- paste0("ln_",sinfo_out$samples)
-colnames(counts_out) <- sinfo_out$sname
-write.table(counts_out, 
-            "/media/labo/Expansion/GEO_submision/totalRNA/Raw_Counts.tsv", 
-            sep = "\t")
-
-counts_out <- as.data.frame(txi_out$counts)
-counts_out <- counts_out[-which(row.names(counts_out) %in% ribo$V1), ]
-
 #Clear the environment
 rm(ribo, tx, files, files_out)
 
