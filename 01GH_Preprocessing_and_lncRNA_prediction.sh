@@ -4,12 +4,12 @@
 base="/media/labo/Expansion/lymph_node_total"
 cd $base
 
-# FASTQC: We perform the quality control of the raw data to asses the general status of the reads.
+# FASTQC: We perform the quality control of the raw data to asses the general status of the reads
 fastqc rawfq/*.fastq.gz
 multiqc rawfq/*.zip
 mv multiqc_data multiqc_report.html log/
 
-# TRIMMOMATIC: Here, we remove the short reads (less than 36 bp) and the bases or reads with low quality.
+# TRIMMOMATIC: Here, we remove the short reads (less than 36 bp) and the bases or reads with low quality
 cd rawfq
 for f1 in *R1_001.fastq.gz
 do
@@ -27,7 +27,7 @@ trimmomatic PE -threads 8 -phred33 \
 echo "${f1%%_1.fastq.gz} done, see log file: $f7"
 done
 
-# FASTQC: We check that low quality bases/reads were removed correctly.
+# FASTQC: We check that low quality bases/reads were removed correctly
 echo "Performing QC of trimmed reads"
 fastqc trimfq/*.fastq.gz
 multiqc trimfq/*.zip
@@ -42,13 +42,13 @@ do
 bbduk.sh -Xmx60000m in=trimfq/$f2 in2=trimfq/$f3 out=rless/$f2 out2=rless/$f3 ref=ref/ribokmers.fa k=31 hdist=1 stats=log/bbduk_log/$f4
 done < script/names.txt
 
-# FASTQC: We check the general status of the samples after removing ribosomic sequences.
+# FASTQC: We check the general status of the samples after removing ribosomic sequences
 echo "Performing QC of trimmed reads"
 fastqc rless/*.fastq.gz
 multiqc rless/*.zip
 mv multiqc_data multiqc_report.html log/
 
-# STAR: We generate the indexes for the alignment and we introduce the index and the trimmed samples in STAR to align the transcripts.
+# STAR: We generate the indexes for the alignment and we introduce the index and the trimmed samples in STAR to align the transcripts
 STAR --runThreadN 8 --runMode genomeGenerate \
 --genomeDir ref/sindex/ \
 --genomeFastaFiles ref/GCF_016772045.2_ARS-UI_Ramb_v3.0_genomic.fna \
@@ -111,10 +111,10 @@ stringtie --merge -G /media/labo/Expansion/lymph_node_total/ref/GCF_016772045.2_
 # GFFCOMPARE: Compare the merged annotation with the available annotation 
 gffcompare -r "/media/labo/Expansion/lymph_node_total/ref/GCF_016772045.2_ARS-UI_Ramb_v3.0_genomic_nogenes.gtf" -V "/media/labo/Expansion/lymph_node_total/assembly/merged.gtf" -o comparison
 
-# lncRNA Characterization: Select candidate lncRNAs as those classified as "u" (unknown intergenic), "i" (intronic),"x" (antisense) and "o" (other same strand overlap).
+# lncRNA Characterization: Select candidate lncRNAs as those classified as "u" (unknown intergenic), "i" (intronic),"x" (antisense) and "o" (other same strand overlap)
 awk -F "\t" 'BEGIN{OFS="\t"} $3=="u" || $3=="i" || $3=="x" || $3=="o" {print $0}' comparison.merged.gtf.tmap > lncRNA_candidate.tmap
 
-# Filter out those transcripts whose length is <200nt if they are multiexonic or <2000nt if they are single-exon.
+# Filter out those transcripts whose length is <200nt if they are multiexonic or <2000nt if they are single-exon
 awk -F "\t" 'BEGIN{OFS="\t"} {if( $6 >= 2 && $10 >= 200 ) {print $0} else if( $6 == 1 && $10 >= 2000 ) {print $0}}' lncRNA_candidate.tmap > lncRNA_candidate2.tmap && mv -f lncRNA_candidate2.tmap lncRNA_candidate.tmap
 
 # Check their coding potential and if they contain protein domains with multiple tools, and select those that pass all the filtering criteria. First we have to extract the nt sequence of the candidate lncRNAs
@@ -127,7 +127,7 @@ mv lncRNA_candidate.tmap lncRNA_candidate.gtf lncRNA_list.txt lncRNA_candidate.f
 /home/labo/soft/CPC2_standalone-1.0.1/bin/CPC2.py -i lncRNA_candidate.fa -o CPC2_results
 sed '1d' CPC2_results.txt | awk -F "\t" '$8=="noncoding" {print $1"\tncRNA"} $8=="coding" {print $1"\tprotein_coding"}' > CPC2_results_summary.txt
 
-# CPAT: Check coding potential.Apply model to detected lncRNAs, using a cow model.
+# CPAT: Check coding potential.Apply model to detected lncRNAs, using a cow model
 modelr="/media/labo/Datuak/Encefalo/cpat/cowmodel/"
 modelhex="/media/labo/Datuak/Encefalo/cpat/cowmodel/"
 mkdir cpat
@@ -136,7 +136,7 @@ cd cpat
 cpat.py -g lncRNA_candidate.fa -d $modelr/cow.logit.RData -x $modelhex/cow_hexamer.tsv -o CPAT_results
 awk -F "\t" '{print $1"\tncRNA"}' CPAT_results.no_ORF.txt > CPAT_results.txt
 
-#CPAT is very strict with genes that do not have an ORF, so we select the genes with a probability below 0.349.
+#CPAT is very strict with genes that do not have an ORF, so we select the genes with a probability below 0.349
 sed '1d' CPAT_results.ORF_prob.best.tsv | awk -F "\t" '$11>=0.349 {print $1"\tprotein_coding"} $11<0.349 {print $1"\tncRNA"}' >> CPAT_results.txt
 mv CPAT_results.txt ..
 cd ..
