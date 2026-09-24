@@ -11,7 +11,7 @@ counts <- read.csv('04_quantification/miRNAs_expressed_all_samples_now.csv',
 sinfo <- read.csv('00_references/sample_info.csv')
 rownames(sinfo) <- sinfo$name
 
-# remove unnecessary columns from sample info and quantification data frames
+# Remove unnecessary columns from sample info and quantification data frames
 sinfo <- sinfo[,-c(1,2)]
 counts <- select(counts, -read_count, -precursor, -total)
 counts <- select(counts, -X001.norm., -X002.norm., -X003.norm., 
@@ -20,18 +20,19 @@ counts <- select(counts, -X001.norm., -X002.norm., -X003.norm.,
                        -X012.norm., -X013.norm., -X014.norm., -X015.norm., 
                        -X016.norm., -X017.norm., -X018.norm., -X019.norm.)
  
-# duplikatutako lerroak kendu
+# Remove duplicated rows
 dup <- counts[duplicated(counts$X.miRNA),]
 counts <- counts[-as.numeric(rownames(dup)), ]
 rm(dup)
 sinfo["sname"] <- paste0("ln_", sinfo$name)
 
-# set mirnas as rownames and samples as colnames
+# Set mirnas as rownames and samples as colnames
 rownames(counts) <- counts[,1]
 counts <- counts[,-1]
 colnames(counts) <- sinfo$sname
 colnames(counts) <- sinfo$name
 
+# Normalize the data with CPM and filter by expression
 normCounts <- as.data.frame(cpm(counts_1))
 fnormCounts <- normCounts[(rowSums(normCounts > 1)) > (length(normCounts)/2), ]
 expressionMatrix <- counts_1[rownames(counts_1) %in% rownames(fnormCounts), ]
