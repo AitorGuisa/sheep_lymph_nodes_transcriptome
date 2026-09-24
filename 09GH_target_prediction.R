@@ -5,6 +5,8 @@ library("gprofiler2")
 load("00_scripts/rdata/diff_expr.RData")
 
 de_miRNAs <- unique(c(rownames(sigAC), rownames(sigVA), rownames(sigVC)))
+
+# Clear environment
 rm(dfresAC, dfresVA, dfresVC, sigAC, sigVA, sigVC)
 
 # Miranda: import data and filter by score and energy
