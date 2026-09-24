@@ -68,7 +68,7 @@ plot_modules_phenotype(phenotype_association)
 phenotype_association[["padj"]][["Vaccine"]] <- 
   p.adjust(phenotype_association$pval$Vaccine, method = "BH")
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # FUNCTIONAL ANNOTATION OF THE DETECTED MODULES
 # Convert the sheep genes into human orthologs.
 df <- as.data.frame(t(nc_filt))
@@ -128,7 +128,7 @@ func_annot_modules = func_annot_modules[func_annot_modules$source %in%
 write.table(func_annot_modules, "coexpr/func_annot_modules.csv", 
             sep = "\t", quote = FALSE, row.names = FALSE)
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # MODULE MEMBERSHIP
 # This command return a data frame that shows the module membership of each gene
 head(nc_filt)
@@ -146,7 +146,7 @@ for(i in aux$Gene){
 write.csv(aux, file="coexpr/module_membership.csv"
           ,quote=FALSE,col.names=TRUE,row.names=FALSE)
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # LNCRNA STATISTICS
 new_lnc <- read.delim("00_scripts/classification/output_files/lncRNAs_gene.txt",
                       row.names = 1)
@@ -163,7 +163,7 @@ ms_vc <- aux[rownames(aux) %in% rownames(sigVC), ]
 ms_ac <- aux[rownames(aux) %in% rownames(sigAC), ]
 ms_va <- aux[rownames(aux) %in% rownames(sigVA), ]
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # NODE AND EDGE TABLES FOR CYTOSCAPE
 # Generate a node table with the gene amount per module and the association of 
 # each module with the vaccine
@@ -190,7 +190,8 @@ for (i in 1:nrow(edge_table)) {
 write.table(edge_table, "coexpr/edge_tablen.csv", sep = "\t", 
             quote = FALSE, row.names = FALSE)
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# HUBGENE DETECTION
 # Extract the hubgenes
 eigenege <- modules$modules_eigengenes
 gene_ModuleMembership <- as.data.frame(cor(nc_filt,eigenege, use="p"))
