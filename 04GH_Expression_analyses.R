@@ -113,9 +113,6 @@ p <- fviz_pca_ind(pcaf,
 )
 print(p)
 
-# Remove potential outliers
-sinfo <- sinfo[!(sinfo$sample %in% "122"), ]
-
 # Perform the DESeq2 core function to identify DEGs
 dds <- DESeq(dds)
 
